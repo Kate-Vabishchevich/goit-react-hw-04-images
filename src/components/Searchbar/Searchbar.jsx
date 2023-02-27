@@ -3,31 +3,24 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import css from './Searchbar.module.css';
 import PropTypes from 'prop-types';
 
-const Searchbar = () => {
+const Searchbar = ({onSubmit}) => {
     const [search, setSearch] = useState('');
 
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
-        const { onSubmit } = this.props;
-         if (this.state.search.trim() === '') {
+         if (search.trim() === '') {
              return alert('Searchfield is empty. Please, enter your request.');
         } 
-        onSubmit({ ...this.state });
-        this.reset();
+        onSubmit(search.trim());
+        reset();
     }
 
-    reset() {
-        this.setState({ search: '' });
+    const reset =() => {
+        setSearch('');
     }
 
-    handleChange = ({ target }) => {
-        const { name, value } = target;
-        this.setState({[name]: value});
-    }
+    const handleChange = e => setSearch(e.target.value);
 
-    render() {
-        const { search } = this.state;
-        const { handleSubmit, handleChange } = this;
         return (
         <header className={css.searchbar}>
             <form className={css.form} onSubmit={handleSubmit}>
@@ -48,7 +41,7 @@ const Searchbar = () => {
                 />
             </form>
         </header>);
-    }
+    
 };
 
 export default Searchbar;
@@ -56,3 +49,10 @@ export default Searchbar;
 Searchbar.propTypes = {
     onSubmit: PropTypes.func.isRequired,
 }
+
+//   const [pictures, setPictures] = useState([]);
+//     const [search, setSearch] = useState('');
+//     const [isLoading, setIsLoading] = useState(false);
+//     const [page, setPage] = useState(1);
+//     const [total, setTotal] = useState(0);
+//     const [error, setError] = useState(null);
