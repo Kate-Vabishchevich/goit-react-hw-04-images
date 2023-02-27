@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Modal from 'components/Modal/Modal';
 
 const ImageGalleryItem = ({webformatURL, tags, largeImageURL}) => {
-    const [isOpen, setIsOpen] = useState;
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleModal = () => setIsOpen(!isOpen);
 

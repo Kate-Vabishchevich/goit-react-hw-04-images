@@ -6,12 +6,12 @@ import Button from './Button/Button';
 import Loader from './Loader/Loader';
 
 const Pictures = () => {
-    const [pictures, setPictures] = useState;
-    const [search, setSearch] = useState;
-    const [isLoading, setIsLoading] = useState;
-    const [page, setPage] = useState;
-    const [total, setTotal] = useState;
-    const [error, setError] = useState;
+    const [pictures, setPictures] = useState([]);
+    const [search, setSearch] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [total, setTotal] = useState(0);
+    const [error, setError] = useState(null);
 
     async componentDidUpdate(prevProps, prevState) {
         const { search, page } = this.state;

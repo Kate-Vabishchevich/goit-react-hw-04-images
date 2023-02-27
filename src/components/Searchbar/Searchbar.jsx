@@ -1,12 +1,10 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import css from './Searchbar.module.css';
 import PropTypes from 'prop-types';
 
-class Searchbar extends Component {
-    state = {
-        search: '',
-    }
+const Searchbar = () => {
+    const [search, setSearch] = useState('');
 
     handleSubmit = e => {
         e.preventDefault();
