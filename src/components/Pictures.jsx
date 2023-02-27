@@ -1,19 +1,17 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import Searchbar from './Searchbar/Searchbar';
 import { searchPictures } from 'services/fetchAPI';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
 
-class Pictures extends Component {
-    state = {
-        pictures: [],
-        search: '',
-        isLoading: false,
-        page: 1,
-        total: 0,
-        error: null,
-    };
+const Pictures = () => {
+    const [pictures, setPictures] = useState;
+    const [search, setSearch] = useState;
+    const [isLoading, setIsLoading] = useState;
+    const [page, setPage] = useState;
+    const [total, setTotal] = useState;
+    const [error, setError] = useState;
 
     async componentDidUpdate(prevProps, prevState) {
         const { search, page } = this.state;
@@ -46,7 +44,6 @@ class Pictures extends Component {
         }));
     };
 
-    render() {
         const { pictures, error, isLoading, total } = this.state;
         const { searchPictures, loadMore } = this;
         const totaPage = pictures.length / total;
@@ -59,7 +56,6 @@ class Pictures extends Component {
                 {isLoading && <Loader />}
             </div>
         );
-    }
 };
 
 export default Pictures;

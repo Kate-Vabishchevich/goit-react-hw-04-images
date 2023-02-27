@@ -1,17 +1,12 @@
 import css from './ImageGalleryItem.module.css';
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import { useState } from 'react';
 import Modal from 'components/Modal/Modal';
 
-class ImageGalleryItem extends Component {
-    state = {
-        isOpen: false,
-    };
-    handleModal = () => { this.setState(({ isOpen }) => ({ isOpen: !isOpen })); };
+const ImageGalleryItem = ({webformatURL, tags, largeImageURL}) => {
+    const [isOpen, setIsOpen] = useState;
 
-
-    render() {
-        const { webformatURL, largeImageURL, tags} = this.props;
+    const handleModal = () => setIsOpen(!isOpen);
 
         return (
             <li className={css.item}>
@@ -20,17 +15,16 @@ class ImageGalleryItem extends Component {
                     alt={tags}
                     source={largeImageURL}
                     className={css.img}
-                    onClick={this.handleModal}
+                    onClick={handleModal}
                 />
-                {this.state.isOpen && (
+                {isOpen && (
                     <Modal
                         largeImageURL={largeImageURL}
-                        onClose={this.handleModal}
+                        onClose={handleModal}
                     />
                 )}
             </li>
         );
-    }
 }
 
 export default ImageGalleryItem;
