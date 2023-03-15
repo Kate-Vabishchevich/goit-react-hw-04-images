@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import Searchbar from './Searchbar/Searchbar';
-// import searchPictures from '../services/fetchAPI';
+import getPictures from '../services/fetchAPI';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
-import { ColorRing } from 'react-loader-spinner';
 
 const Pictures = () => {
   const [pictures, setPictures] = useState(null);
@@ -14,16 +13,34 @@ const Pictures = () => {
   const [total, setTotal] = useState(0);
   const [error, setError] = useState('');
 
+  // useEffect(() => {
+  //   if (!query) {
+  //     console.log('query', query);
+  //     return;
+  //   }
+  //   try {
+  //     setIsLoading(true);
+  //     getPictures(query, page).then(data => {
+  //       setPictures(prevState => [...prevState, ...data.hits]);
+  //     });
+  //   } catch (error) {
+  //     setError(error => error.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }, [query, page]);
+
   useEffect(() => {
     if (!query) {
+      console.log('query', query);
       return;
     }
     const fetchPictures = async () => {
       setIsLoading(true);
       try {
-        const images = await searchPictures;
+        const images = await getPictures(query, page);
         console.log('images:', images);
-        if (images === 0) {
+        if (images.length === 0) {
           return;
         }
         setPictures(prevState => [...prevState, ...images.hits]);
@@ -67,20 +84,18 @@ const Pictures = () => {
     setPage(page => page + 1);
   };
 
-  // const { pictures, error, isLoading, total } = this.state;
-  // const { searchPictures, loadMore } = this;
-  //   const totaPage = pictures.length / total;
+  // const totaPage = pictures.length / total;
   return (
     console.log(pictures),
     (
       <div>
         <Searchbar onSubmit={searchPictures} />
-        {/*pictures && <ImageGallery pictures={pictures} /> */}
+        <ImageGallery pictures={pictures} />
+        {/* {totaPage < 1 && !isLoading && <Button onClick={loadMore} />} */}
+        {isLoading && <Loader />}
         {error && (
           <p>Whoops, something went wrong. Please, refresh the page </p>
         )}
-        {/* {totaPage < 1 && !isLoading && <Button onClick={loadMore} />} */}
-        {/* {isLoading && <Loader />} */}
       </div>
     )
   );
