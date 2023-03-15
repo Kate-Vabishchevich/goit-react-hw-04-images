@@ -12,16 +12,12 @@ const Searchbar = ({onSubmit}) => {
              return alert('Searchfield is empty. Please, enter your request.');
         } 
         onSubmit(search.trim());
-        reset();
-    }
-
-    const reset =() => {
         setSearch('');
     }
 
     const handleChange = e => setSearch(e.target.value);
 
-        return (
+    return (
         <header className={css.searchbar}>
             <form className={css.form} onSubmit={handleSubmit}>
                 <button type="submit" className={css.button}>
@@ -49,10 +45,3 @@ export default Searchbar;
 Searchbar.propTypes = {
     onSubmit: PropTypes.func.isRequired,
 }
-
-//   const [pictures, setPictures] = useState([]);
-//     const [search, setSearch] = useState('');
-//     const [isLoading, setIsLoading] = useState(false);
-//     const [page, setPage] = useState(1);
-//     const [total, setTotal] = useState(0);
-//     const [error, setError] = useState(null);

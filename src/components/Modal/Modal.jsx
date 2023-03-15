@@ -1,46 +1,35 @@
-import { Component } from 'react';
 import { createPortal } from 'react-dom';
 import css from './Modal.module.css';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 const modalRoot = document.querySelector('#modal-root');
 
-class Modal extends Component {
-    componentDidMount() {
-        window.addEventListener('keydown', this.handleCloseByEsc )
-    }
+const Modal = ({ largeImageURL, tags, onClose }) => {
+  useEffect(() => {
+    const handleCloseByEsc = event => {
+      if (event.code === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleCloseByEsc);
+    return () => window.removeEventListener('keydown', handleCloseByEsc);
+  }, [onClose]);
 
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.handleCloseByEsc)
+  const handleCloseByOverlay = event => {
+    if (event.target === event.currentTarget) {
+      onClose();
     }
+  };
 
-    handleCloseByEsc = event => {
-        if (event.code === 'Escape') {
-           this.props.onClose(); 
-        }
-    }
-
-    handleCloseByOverlay = event => {
-        if (event.target === event.currentTarget) {
-            this.props.onClose();
-        }
-    }
-    
-    render() {
-        const { largeImageURL, tags } = this.props;
-        
-        return createPortal(
-            <div className={css.overlay} onClick={this.handleCloseByOverlay}>
-                <div className={css.modal}>
-                    <img
-                        src={largeImageURL}
-                        alt={tags}
-                    />
-                </div>
-            </div>,
-            modalRoot,
-        );
-    }
+  return createPortal(
+    <div className={css.overlay} onClick={handleCloseByOverlay}>
+      <div className={css.modal}>
+        <img src={largeImageURL} alt={tags} />
+      </div>
+    </div>,
+    modalRoot
+  );
 };
 
 export default Modal;
@@ -50,4 +39,3 @@ Modal.propTypes = {
   tags: PropTypes.string,
   onClose: PropTypes.func.isRequired,
 };
-
