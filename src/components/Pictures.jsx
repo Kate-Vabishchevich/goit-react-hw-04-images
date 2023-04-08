@@ -4,6 +4,9 @@ import getPictures from '../services/fetchAPI';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Pictures = () => {
   const [pictures, setPictures] = useState([]);
@@ -56,7 +59,9 @@ const Pictures = () => {
         <Button onClick={loadMore} />
       )}
       {isLoading && <Loader />}
-      {error && <p>Whoops, something went wrong. Please, refresh the page </p>}
+      {error &&
+        toast.error('Whoops, something went wrong. Please, refresh the page')}
+      <ToastContainer position="top-center" autoClose={1500} />
     </div>
   );
 };
