@@ -21,13 +21,13 @@ const ImageGallery = ({ pictures }) => {
 
 export default ImageGallery;
 
-// ImageGallery.propTypes = {
-//   pictures: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       largeImageURL: PropTypes.string.isRequired,
-//       webformatURL: PropTypes.string.isRequired,
-//       tags: PropTypes.string.isRequired,
-//     })
-//   ),
-// };
+ImageGallery.propTypes = {
+  pictures: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    })
+  ),
+};

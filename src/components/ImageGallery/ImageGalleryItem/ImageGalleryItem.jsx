@@ -17,7 +17,13 @@ const ImageGalleryItem = ({ webformatURL, tags, largeImageURL }) => {
         className={css.img}
         onClick={handleModal}
       />
-      {isOpen && <Modal largeImageURL={largeImageURL} onClose={handleModal} />}
+      {isOpen && (
+        <Modal
+          largeImageURL={largeImageURL}
+          tags={tags}
+          onClose={handleModal}
+        />
+      )}
     </li>
   );
 };
