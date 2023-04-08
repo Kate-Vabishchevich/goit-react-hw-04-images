@@ -34,8 +34,8 @@ const Modal = ({ largeImageURL, tags, onClose }) => {
 
 export default Modal;
 
-// Modal.propTypes = {
-//   largeImageURL: PropTypes.string.isRequired,
-//   tags: PropTypes.string,
-//   onClose: PropTypes.func.isRequired,
-// };
+Modal.propTypes = {
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.string,
+  onClose: PropTypes.func.isRequired,
+};
